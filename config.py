@@ -4,6 +4,10 @@ import os
 from dataclasses import dataclass
 from pathlib import Path
 
+try:
+    import streamlit as st
+except Exception:
+    st = None
 
 def _env_bool(name: str, default: bool) -> bool:
     raw = os.getenv(name)
@@ -48,7 +52,11 @@ class AppConfig:
     # openai_compatible = local endpoint speaking OpenAI API 
     # huggingface = local transformers summarisation pipeline
     LLM_PROVIDER: str = os.getenv("LLM_PROVIDER", "openai")
-    OPENAI_API_KEY: str | None = ("")
+    OPENAI_API_KEY: str | None = (
+    st.secrets.get("OPENAI_API_KEY", os.getenv("OPENAI_API_KEY"))
+    if st is not None
+    else os.getenv("OPENAI_API_KEY")
+)
     OPENAI_BASE_URL: str | None = None
     OPENAI_MODEL: str = os.getenv("OPENAI_MODEL", "gpt-4.1-mini")
     OPENAI_TEMPERATURE: float = float(os.getenv("OPENAI_TEMPERATURE", "0.2"))
