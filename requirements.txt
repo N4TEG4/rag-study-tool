@@ -1,7 +1,7 @@
 # Dependencies
 # Install with: pip install -r requirements.txt
 
-#IMPORTANT!! -- To run the app within your browser, you must enter "streamlit run app.py" inside your terminal
+#IMPORTANT!! -- To run the app locally, you must enter "streamlit run app.py" inside your terminal while also having your own chatgpt API key. If you do not, you must run the app via streamlit
 streamlit>=1.30
 openai>=1.0.0
 sentence-transformers>=2.6.0
